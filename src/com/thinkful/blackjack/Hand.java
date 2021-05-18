@@ -11,9 +11,13 @@ public class Hand {
     }
 public Hand(){
         this.cards = new ArrayList<>();
+        setStatus(HandStatus.OPEN);
 }
 public void addCard(Card card){
         this.getCards().add(card);
+        if(getValue() > 21){
+            setStatus(HandStatus.BUST);
+        }
 }
 public int getValue(){
         int total = 0;
@@ -38,4 +42,13 @@ public int getValue(){
         return String.format("Value=%d, %s", this.getValue(), sb.toString());
     }
 
+    private HandStatus status;
+
+    public HandStatus getStatus(){
+        return status;
+    }
+
+    public void setStatus(HandStatus status){
+        this.status = status;
+    }
 }
