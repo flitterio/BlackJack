@@ -1,43 +1,37 @@
 package com.thinkful.blackjack;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-//        Deck deck = new Deck();
-//        deck.shuffle();
-//        System.out.println("This is the shuffled Deck");
-//        System.out.println(deck);
-//
-//        Hand hand = new Hand();
-//        System.out.println("The empty Hand:");
-//        System.out.println(hand);
-//        hand.addCard(deck.deal());
-//        System.out.println("After one card is dealt");
-//        System.out.println(hand);
-//        hand.addCard(deck.deal());
-//        System.out.println("After two cards are dealt");
-//        System.out.println(hand);
-//
-//        System.out.println("The deck after two cards are dealt");
-//        System.out.println(deck);
-        Game game = new Game();
-        System.out.println("The initial Game");
-        System.out.println(game);
+        Main main = new Main();
+        main.play();
+    }
 
-        System.out.print("The player's turn");
-        while(game.isPlayerTurn()){
-            if(game.getPlayer().getValue() < 18){
-                System.out.println("HIT");
-                game.playerMove(Action.HIT);
-            } else {
-                System.out.println("STAND");
-                game.playerMove(Action.STAND);
+    public void play(){
+        boolean keepPlaying = true;
+        Scanner scanner = new Scanner(System.in);
+        while(keepPlaying){
+            String menuChoice = getMenuChoice(scanner);
+            keepPlaying = menuChoice.equalsIgnoreCase("s");
+            if (keepPlaying){
+                //play game here
+                System.out.println("This is one game play here");
             }
-            System.out.println("The dealer's Turn");
-            game.dealerMove();
-
-            System.out.println(game.outcome());
-            System.out.println(game);
-
         }
+        System.out.println("Thank you for playing!");
+    }
+    public String getMenuChoice(Scanner scanner){
+        String menuChoice = "";
+        boolean isValid = false;
+        while(!isValid){
+            System.out.println("Welcome to Blackjack!\n\nPress s to start a game or e to exit");
+            menuChoice = scanner.next();
+            isValid = menuChoice.equalsIgnoreCase("s") || menuChoice.equalsIgnoreCase("e");
+            if(!isValid){
+                System.out.print("Invalid choice!");
+            }
+        }
+        return menuChoice;
     }
 }
